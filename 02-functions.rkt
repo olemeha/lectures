@@ -16,6 +16,7 @@
                 (overlay/offset wheels
                                 0 -15
                                 *car-body*)))
+
 #|-----------------------------------------------------------------------------
 ;; Function definitions
 
@@ -30,7 +31,6 @@
   (/ x y)
   (+ x y))
 
-
 #|-----------------------------------------------------------------------------
 ;; Some more special forms
 
@@ -38,6 +38,8 @@
 - `if`: if-then-else
 - `when`: if-then
 - `cond`: multi-way conditional
+- `match`: pattern match
+- `set!': variable assignment
 -----------------------------------------------------------------------------|#
 
 #; (begin body ...)
@@ -50,6 +52,13 @@
          [expr2 body ...]
          [else body ...])
 
+#; (match val
+     [pattern1 body ...]
+     [pattern2 body ...]
+     [pattern3 body ...])
+
+#; (set! id expr)
+
 
 #|-----------------------------------------------------------------------------
 ;; Equality tests
@@ -59,7 +68,23 @@
 - `equal?` for value-based equality
 -----------------------------------------------------------------------------|#
 
+
 (define lst '(a b c))
+
+#; (values 
+     (= 2 2)
+     (= 2 2.0)
+     (= 2 2.01)
+     (= 2 2.0000000000000000001)
+     (= 2 8/4)
+     (eq? 'a 'a)
+     (eq? "hello world" "hello world")
+     (eq? '(a b c) '(a b c))
+     (let ([lst '(a b c)]) (eq? lst lst))
+     (equal? "hello world" "hello world")
+     (equal? '(a b c) '(a b c)))
+
+
 
 #|-----------------------------------------------------------------------------
 ;; Recursion
@@ -153,3 +178,4 @@ Some useful built-in HOFs and related functions:
 - A free variable is bound to a value *in the environment where it is defined*, 
   regardless of when it is used
 -----------------------------------------------------------------------------|#
+
