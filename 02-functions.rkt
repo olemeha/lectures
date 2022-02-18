@@ -146,7 +146,7 @@
       (cons x (repeat (- n 1) x))))
 (trace repeat)
 (define (reverse lst)
-  (trace-let rec ([lst lst]
+  (let rec ([lst lst]
             [acc '()])
   (if (empty? lst)
       acc
